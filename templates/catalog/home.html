@@ -1,0 +1,8 @@
+<h1> DevShelf Catalog</h1>
+<p>Welcome to the catalog</p>
+{% for technology in technologies %}
+    <a href="{% url 'technology_detail' technology.pk %}">
+        {{ technology.name }}
+    </a> -
+    {{ technology.description }}<br>
+{% endfor %}
