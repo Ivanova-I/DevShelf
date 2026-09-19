@@ -1,2 +1,5 @@
-<h>{{ technology.name }}</h>
+<h1>{{ technology.name }}</h1>
 <p>{{ technology.description }}</p>
+<a href="{% url 'catalog_home' %}">Back to Catalog</a>
+<a href="{% url 'technology_edit' technology.pk %}">Edit</a>
+<a href="{% url 'technology_delete' technology.pk %}">Delete</a>

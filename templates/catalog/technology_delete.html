@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Technology</title>
+
+</head>
+<body>
+<h1>Delete Technology</h1>
+
+    <p>Are you sure you want to delete {{ technology.name }}?</p>
+ <form method="post">
+    {% csrf_token %}
+
+
+    <button type="submit">Delete Technology</button>
+</form>
+     <a href="{% url 'technology_detail' technology.pk %}">Cancel</a>
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+
+</body>
+</html>
