@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resources</title>
+</head>
+<body>
+<h1> DevShelf Resources</h1>
+<p>Welcome to the resources</p>
+{% for resource in resources %}
+    <a href="{% url 'resources_detail' resource.pk %}">
+        {{ resource.title }}
+    </a> -
+    {{ resource.description }}<br>
+{% empty %}
+    No resources available
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resources Detail</title>
+</head>
+<body>
+<h1>{{ resource.title }}</h1>
+<p>{{ resource.description }}</p>
+<a href="{% url 'resources_home' %}">Back to Resources </a>
+<a href="{% url 'resources_edit' resource.pk %}">Edit</a>
+<a href="{% url 'resources_delete' resource.pk %}">Delete</a>
+
+
+</body>
+</html>

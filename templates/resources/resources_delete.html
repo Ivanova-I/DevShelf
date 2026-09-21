@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resources Delete</title>
+</head>
+<body>
+    <p>Are you sure you want to delete {{ resource.title }}?</p>
+ <form method="post">
+    {% csrf_token %}
+
+
+    <button type="submit">Delete Resource</button>
+</form>
+     <a href="{% url 'resources_detail' resource.pk %}">Cancel</a>
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+</body>
+</html>
