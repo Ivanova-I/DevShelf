@@ -1,20 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Resources</title>
-</head>
-<body>
-<h1> DevShelf Resources</h1>
-<p>Welcome to the resources</p>
-{% for resource in resources %}
-    <a href="{% url 'resources_detail' resource.pk %}">
-        {{ resource.title }}
-    </a> -
-    {{ resource.description }}<br>
-{% empty %}
-    No resources available
-{% endfor %}
 
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Resources | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div>
+        <span class="badge">Developer Library</span>
+
+        <h1>Explore Resources</h1>
+
+        <p>
+            Discover tutorials, documentation, courses and other
+            resources to strengthen your development skills.
+        </p>
+    </div>
+
+    <a class="button" href="{% url 'resources_create' %}">
+        + Add Resource
+    </a>
+</section>
+
+
+<section class="resource-grid">
+
+    {% for resource in resources %}
+
+        <article class="resource-card">
+
+            <div class="resource-card-top">
+                <span class="badge">
+                    {{ resource.resource_type }}
+                </span>
+
+                <span class="difficulty {{ resource.difficulty }}">
+                    {{ resource.difficulty }}
+                </span>
+            </div>
+
+            <h2>{{ resource.title }}</h2>
+
+            <p>{{ resource.description }}</p>
+
+            <div class="resource-meta">
+
+                <span>
+                    ⏱ {{ resource.estimated_minutes }} min
+                </span>
+
+                <span>
+                    ★ {{ resource.rating }}
+                </span>
+
+            </div>
+
+            <div class="resource-card-footer">
+
+                <span class="technology">
+                    {{ resource.technology.name }}
+                </span>
+
+                <a href="{% url 'resources_detail' resource.pk %}">
+                    View →
+                </a>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="card">
+            <h2>No resources yet</h2>
+
+            <p>
+                Your learning library is empty.
+                Add your first resource to get started.
+            </p>
+
+            <a class="button" href="{% url 'resources_create' %}">
+                Add Resource
+            </a>
+        </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}
+```
+

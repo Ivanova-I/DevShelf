@@ -1,16 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Resources Detail</title>
-</head>
-<body>
-<h1>{{ resource.title }}</h1>
-<p>{{ resource.description }}</p>
-<a href="{% url 'resources_home' %}">Back to Resources </a>
-<a href="{% url 'resources_edit' resource.pk %}">Edit</a>
-<a href="{% url 'resources_delete' resource.pk %}">Delete</a>
+
+{% extends 'base.html' %}
+
+{% block title %}{{ resource.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="detail-page">
+
+    <div class="detail-header">
+
+        <div>
+            <span class="badge">
+                {{ resource.resource_type }}
+            </span>
+
+            <h1>{{ resource.title }}</h1>
+
+            <p>{{ resource.description }}</p>
+        </div>
+
+        <div class="detail-actions">
+            <a class="button" href="{{ resource.url }}" target="_blank">
+                Open Resource ↗
+            </a>
+        </div>
+
+    </div>
 
 
-</body>
-</html>
+    <div class="detail-grid">
+
+        <article class="card">
+
+            <h2>About this resource</h2>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Technology</span>
+                    <strong>{{ resource.technology.name }}</strong>
+                </div>
+
+                <div>
+                    <span>Difficulty</span>
+                    <strong>{{ resource.difficulty }}</strong>
+                </div>
+
+                <div>
+                    <span>Estimated time</span>
+                    <strong>{{ resource.estimated_minutes }} minutes</strong>
+                </div>
+
+                <div>
+                    <span>Rating</span>
+                    <strong>★ {{ resource.rating }} / 5</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="card">
+
+            <h2>Tags</h2>
+
+            <div class="tag-list">
+
+                {% for tag in resource.tags.all %}
+                    <span class="badge">
+                        #{{ tag.name }}
+                    </span>
+                {% empty %}
+                    <p>No tags assigned.</p>
+                {% endfor %}
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <div class="detail-footer">
+
+        <a href="{% url 'resources_home' %}">
+            ← Back to Resources
+        </a>
+
+        <div>
+            <a class="button secondary-button"
+               href="{% url 'resources_edit' resource.pk %}">
+                Edit
+            </a>
+
+            <a class="button danger-button"
+               href="{% url 'resources_delete' resource.pk %}">
+                Delete
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+```

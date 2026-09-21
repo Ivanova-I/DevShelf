@@ -1,17 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Resources Create </title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
 
-    {{ form.as_p }}
+{% extends 'base.html' %}
 
-    <button type="submit">Create Resource</button>
-</form>
+{% block title %}Add Resource | DevShelf{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Developer Library</span>
+
+        <h1>Add a Resource</h1>
+
+        <p>
+            Add a useful article, course, video, book or documentation
+            page to your DevShelf library.
+        </p>
+    </div>
+
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'resources_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Add Resource
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
+

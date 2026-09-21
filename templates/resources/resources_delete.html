@@ -1,20 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Resources Delete</title>
-</head>
-<body>
-    <p>Are you sure you want to delete {{ resource.title }}?</p>
- <form method="post">
-    {% csrf_token %}
+{% extends 'base.html' %}
+
+{% block title %}Delete {{ resource.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Delete Resource</span>
+
+        <h1>Delete this resource?</h1>
+
+        <p>
+            You are about to delete
+            <strong>{{ resource.title }}</strong>.
+            This action cannot be undone.
+        </p>
+    </div>
 
 
-    <button type="submit">Delete Resource</button>
-</form>
-     <a href="{% url 'resources_detail' resource.pk %}">Cancel</a>
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
-</body>
-</html>
+    <div class="card delete-card">
+
+        {% if error %}
+
+            <div class="error-message">
+                <strong>Resource cannot be deleted</strong>
+
+                <p>{{ error }}</p>
+            </div>
+
+            <div class="form-actions">
+                <a class="button secondary-button"
+                   href="{% url 'resources_detail' resource.pk %}">
+                    Back to Resource
+                </a>
+            </div>
+
+        {% else %}
+
+            <p>
+                Are you sure you want to permanently remove this resource
+                from your DevShelf library?
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-actions">
+
+                    <a class="button secondary-button"
+                       href="{% url 'resources_detail' resource.pk %}">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="danger-button">
+                        Yes, Delete Resource
+                    </button>
+
+                </div>
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

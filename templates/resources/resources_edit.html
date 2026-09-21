@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Resources Edit</title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
+{% extends 'base.html' %}
 
-    {{ form.as_p }}
+{% block title %}Edit {{ resource.title }} | DevShelf{% endblock %}
 
-    <button type="submit">Edit Resource</button>
-</form>
+{% block content %}
 
-</body>
-</html>
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Developer Library</span>
+
+        <h1>Edit Resource</h1>
+
+        <p>
+            Update the details of this resource and keep your
+            DevShelf library accurate and useful.
+        </p>
+    </div>
+
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'resources_detail' resource.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
