@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ note.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="detail-page">
+
+    <div class="detail-header">
+
+        <div>
+            <span class="badge">Resource Note</span>
+
+            <h1>{{ note.title }}</h1>
+
+            <p>{{ note.content }}</p>
+        </div>
+
+    </div>
+
+    <div class="detail-grid">
+
+        <article class="card">
+
+            <h2>Note Details</h2>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Title</span>
+                    <strong>{{ note.title }}</strong>
+                </div>
+
+                <div>
+                    <span>Resource</span>
+                    <strong>{{ note.resource.title }}</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+        <article class="card">
+
+            <h2>Actions</h2>
+
+            <p>
+                Manage this note or return to your notes.
+            </p>
+
+            <div class="form-actions">
+
+                <a class="button secondary-button"
+                   href="{% url 'note_edit' note.pk %}">
+                    Edit
+                </a>
+
+                <a class="button danger-button"
+                   href="{% url 'note_delete' note.pk %}">
+                    Delete
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+    <div class="detail-footer">
+
+        <a href="{% url 'note_home' %}">
+            ← Back to Notes
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

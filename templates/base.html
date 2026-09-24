@@ -16,11 +16,12 @@
 
 <header>
     <nav>
-        <a href="{% url 'catalog_home' %}">DevShelf</a>
-
+        <a href="{% url 'home' %}">DevShelf</a>
         <div>
             <a href="{% url 'catalog_home' %}">Catalog</a>
             <a href="{% url 'resources_home' %}">Resources</a>
+            <a href="{% url 'learning_home' %}">Learning Paths</a>
+            <a href="{% url 'note_home' %}">Notes</a>
         </div>
     </nav>
 </header>
@@ -30,10 +31,31 @@
     {% endblock %}
 </main>
 
-<footer>
-    <p>&copy; 2026 DevShelf</p>
+<footer class="site-footer">
+
+    <div class="site-footer-inner">
+
+        <div>
+            <strong>DevShelf</strong>
+            <span>Developer Learning Library</span>
+        </div>
+
+        <div class="site-footer-right">
+            <span>Created by Iva Ivanova</span>
+
+            <a href="https://github.com/Ivanova-I"
+               target="_blank"
+               rel="noopener noreferrer">
+                GitHub ↗
+            </a>
+
+            <span>© 2026</span>
+        </div>
+
+    </div>
+
 </footer>
 
 </body>
 </html>
-```
+

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Technology
+from .models import Technology, Tag
 class TechnologyForm(forms.ModelForm):
     class Meta:
         model = Technology
@@ -11,3 +11,8 @@ class TechnologyForm(forms.ModelForm):
         if len(name.strip()) < 2:
             raise forms.ValidationError('The name must be at least 2 characters long')
         return name.strip()
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['name',]

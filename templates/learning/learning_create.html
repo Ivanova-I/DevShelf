@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Learning Path | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Learning Library</span>
+
+        <h1>Create a Learning Path</h1>
+
+        <p>
+            Build a structured learning path by combining resources
+            into a focused development journey.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'learning_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Create Learning Path
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{ note.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Resource Notes</span>
+
+        <h1>Edit Note</h1>
+
+        <p>
+            Update the details for
+            <strong>{{ note.title }}</strong>.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'note_detail' note.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

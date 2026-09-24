@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Learning Paths | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div>
+        <span class="badge">Learning Library</span>
+
+        <h1>Learning Paths</h1>
+
+        <p>
+            Follow structured learning paths to build your development
+            skills step by step.
+        </p>
+    </div>
+
+    <a class="button" href="{% url 'learning_create' %}">
+        + Create Learning Path
+    </a>
+
+</section>
+
+<section class="learning-grid">
+
+    {% for learning_path in learn %}
+
+        <article class="learning-card">
+
+            <div class="learning-card-top">
+                <span class="badge">
+                    {{ learning_path.difficulty }}
+                </span>
+            </div>
+
+            <h2>{{ learning_path.title }}</h2>
+
+            <p>
+                {{ learning_path.description }}
+            </p>
+
+            <div class="learning-meta">
+                <span>
+                    ⏱ {{ learning_path.estimated_hours }} hours
+                </span>
+
+                <span>
+                    📚 {{ learning_path.resources.count }} resources
+                </span>
+            </div>
+
+            <div class="learning-card-footer">
+
+                <a href="{% url 'learning_detail' learning_path.pk %}">
+                    View Learning Path →
+                </a>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="card">
+            <h2>No learning paths yet</h2>
+
+            <p>
+                Create your first learning path to start organizing
+                your development journey.
+            </p>
+
+            <a class="button" href="{% url 'learning_create' %}">
+                Create Learning Path
+            </a>
+        </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

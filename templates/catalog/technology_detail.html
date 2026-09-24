@@ -1,5 +1,82 @@
-<h1>{{ technology.name }}</h1>
-<p>{{ technology.description }}</p>
-<a href="{% url 'catalog_home' %}">Back to Catalog</a>
-<a href="{% url 'technology_edit' technology.pk %}">Edit</a>
-<a href="{% url 'technology_delete' technology.pk %}">Delete</a>
+{% extends 'base.html' %}
+
+{% block title %}{{ technology.name }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="detail-page">
+
+    <div class="detail-header">
+
+        <div>
+            <span class="badge">Technology</span>
+
+            <h1>{{ technology.name }}</h1>
+
+            <p>{{ technology.description }}</p>
+        </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+        <article class="card">
+
+            <h2>About this technology</h2>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Name</span>
+                    <strong>{{ technology.name }}</strong>
+                </div>
+
+                <div>
+                    <span>Description</span>
+                    <strong>{{ technology.description }}</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="card">
+
+            <h2>Actions</h2>
+
+            <p>
+                Manage this technology or return to your catalog.
+            </p>
+
+            <div class="form-actions">
+
+                <a class="button secondary-button"
+                   href="{% url 'technology_edit' technology.pk %}">
+                    Edit
+                </a>
+
+                <a class="button danger-button"
+                   href="{% url 'technology_delete' technology.pk %}">
+                    Delete
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <div class="detail-footer">
+
+        <a href="{% url 'catalog_home' %}">
+            ← Back to Catalog
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

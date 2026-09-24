@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Tags | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div>
+        <span class="badge">Resource Organization</span>
+
+        <h1>Tags</h1>
+
+        <p>
+            Browse the tags used to organize your development resources.
+        </p>
+    </div>
+
+    <a class="button" href="{% url 'tag_create' %}">
+        + Add Tag
+    </a>
+
+</section>
+
+<section class="tag-grid">
+
+    {% for tag_item in tag %}
+
+        <article class="tag-card">
+
+            <span class="badge">
+                #{{ tag_item.name }}
+            </span>
+
+            <p>
+                {{ tag_item.resources.count }}
+                resource{{ tag_item.resources.count|pluralize }}
+            </p>
+
+            <div class="form-actions">
+
+                <a class="button secondary-button"
+                   href="{% url 'tag_edit' tag_item.pk %}">
+                    Edit
+                </a>
+
+
+                <a class="button danger-button"
+                   href="{% url 'tag_delete' tag_item.pk %}">
+                    Delete
+                </a>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="card">
+
+            <h2>No tags yet</h2>
+
+            <p>
+                There are no tags in your DevShelf library yet.
+            </p>
+
+            <a class="button" href="{% url 'tag_create' %}">
+                Add Tag
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

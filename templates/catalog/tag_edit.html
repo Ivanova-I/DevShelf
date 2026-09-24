@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{ tag.name }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Resource Organization</span>
+
+        <h1>Edit Tag</h1>
+
+        <p>
+            Update the tag
+            <strong>#{{ tag.name }}</strong>
+            used to organize your development resources.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'tag_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

@@ -4,7 +4,69 @@
 {% block title %}Resources | DevShelf{% endblock %}
 
 {% block content %}
+<form method="get" class="resource-filter">
 
+    <div>
+        <label for="technology">
+            Technology
+        </label>
+
+        <select name="technology" id="technology">
+
+            <option value="">
+                All Technologies
+            </option>
+
+            {% for technology in technologies %}
+
+                <option value="{{ technology.pk }}"
+                    {% if request.GET.technology == technology.pk|stringformat:"s" %}
+                        selected
+                    {% endif %}>
+                    {{ technology.name }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+    </div>
+
+
+    <div>
+        <label for="sort">
+            Sort by
+        </label>
+
+        <select name="sort" id="sort">
+
+            <option value="">
+                Default
+            </option>
+
+            <option value="title"
+                {% if request.GET.sort == "title" %}selected{% endif %}>
+                Title A–Z
+            </option>
+
+            <option value="rating"
+                {% if request.GET.sort == "rating" %}selected{% endif %}>
+                Highest Rating
+            </option>
+
+            <option value="duration"
+                {% if request.GET.sort == "duration" %}selected{% endif %}>
+                Shortest Duration
+            </option>
+
+        </select>
+    </div>
+
+
+    <button type="submit">
+        Apply
+    </button>
+
+</form>
 <section class="page-header">
     <div>
         <span class="badge">Developer Library</span>
@@ -89,5 +151,5 @@
 </section>
 
 {% endblock %}
-```
+
 

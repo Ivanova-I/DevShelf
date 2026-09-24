@@ -1,8 +1,68 @@
-<h1> DevShelf Catalog</h1>
-<p>Welcome to the catalog</p>
-{% for technology in technologies %}
-    <a href="{% url 'technology_detail' technology.pk %}">
-        {{ technology.name }}
-    </a> -
-    {{ technology.description }}<br>
-{% endfor %}
+{% extends 'base.html' %}
+
+{% block title %}Catalog | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div>
+        <span class="badge">Technology Library</span>
+
+        <h1>Explore Technologies</h1>
+
+        <p>
+            Browse the technologies in your DevShelf library and
+            discover resources for each one.
+        </p>
+    </div>
+
+    <a class="button" href="{% url 'technology_create' %}">
+        + Add Technology
+    </a>
+</section>
+
+
+<section class="technology-grid">
+
+    {% for technology in technologies %}
+
+        <article class="technology-card">
+
+            <div class="technology-card-top">
+                <span class="technology-icon">◆</span>
+            </div>
+
+            <h2>{{ technology.name }}</h2>
+
+            <p>
+                {{ technology.description }}
+            </p>
+
+            <div class="technology-card-footer">
+                <a href="{% url 'technology_detail' technology.pk %}">
+                    View Technology →
+                </a>
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="card">
+            <h2>No technologies yet</h2>
+
+            <p>
+                Your technology library is empty.
+                Add your first technology to get started.
+            </p>
+
+            <a class="button" href="{% url 'technology_create' %}">
+                Add Technology
+            </a>
+        </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

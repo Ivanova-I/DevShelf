@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Tag | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Resource Organization</span>
+
+        <h1>Add a Tag</h1>
+
+        <p>
+            Create a tag to help organize and categorize your
+            development resources.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'tag_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Add Tag
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

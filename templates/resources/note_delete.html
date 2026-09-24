@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete {{ note.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="delete-card card">
+
+    <div class="form-header">
+        <span class="badge">Resource Notes</span>
+
+        <h1>Delete Note</h1>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ note.title }}</strong>?
+        </p>
+    </div>
+
+    {% if error %}
+        <div class="error-message">
+            <strong>Unable to delete note</strong>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'note_detail' note.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit" class="danger-button">
+                Delete Note
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

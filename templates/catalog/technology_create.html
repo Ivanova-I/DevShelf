@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Technology</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
- <form method="post">
-    {% csrf_token %}
+{% block title %}Add Technology | DevShelf{% endblock %}
 
-    {{ form.as_p }}
+{% block content %}
 
-    <button type="submit">Create Technology</button>
-</form>
-</body>
-</html>
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Technology Library</span>
+
+        <h1>Add a Technology</h1>
+
+        <p>
+            Add a technology to your DevShelf catalog so you can
+            organize and discover related learning resources.
+        </p>
+    </div>
+
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'catalog_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Add Technology
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

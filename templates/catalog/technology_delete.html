@@ -1,24 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Technology</title>
 
-</head>
-<body>
-<h1>Delete Technology</h1>
+{% extends 'base.html' %}
 
-    <p>Are you sure you want to delete {{ technology.name }}?</p>
- <form method="post">
-    {% csrf_token %}
+{% block title %}Delete {{ technology.name }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="delete-card card">
+
+    <div class="form-header">
+        <span class="badge">Technology Library</span>
+
+        <h1>Delete Technology</h1>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ technology.name }}</strong>?
+        </p>
+    </div>
 
 
-    <button type="submit">Delete Technology</button>
-</form>
-     <a href="{% url 'technology_detail' technology.pk %}">Cancel</a>
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
+    {% if error %}
 
-</body>
-</html>
+        <div class="error-message">
+            <strong>Unable to delete technology</strong>
+            <p>{{ error }}</p>
+        </div>
+
+    {% endif %}
+
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'technology_detail' technology.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit" class="danger-button">
+                Delete Technology
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
+

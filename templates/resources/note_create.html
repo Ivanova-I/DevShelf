@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Note | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Resource Notes</span>
+
+        <h1>Create a Note</h1>
+
+        <p>
+            Write down something useful you've learned and attach
+            it to the resource you're studying.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'note_home' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Create Note
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

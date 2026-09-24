@@ -1,17 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Technology</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
- <form method="post">
-    {% csrf_token %}
+{% block title %}Edit {{ technology.name }} | DevShelf{% endblock %}
 
-    {{ form.as_p }}
+{% block content %}
 
-    <button type="submit">Edit Technology</button>
-</form>
-</body>
-</html>
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Technology Library</span>
+
+        <h1>Edit Technology</h1>
+
+        <p>
+            Update the details for
+            <strong>{{ technology.name }}</strong>
+            in your DevShelf catalog.
+        </p>
+    </div>
+
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'technology_detail' technology.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}DevShelf | Learn. Organize. Grow.{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">Developer Learning Library</span>
+
+        <h1>
+            Learn, organize,<br>
+            and grow with DevShelf.
+        </h1>
+
+        <p>
+            DevShelf helps you collect development resources,
+            organize them by technology, build learning paths,
+            and keep useful notes in one place.
+        </p>
+
+        <div class="hero-actions">
+
+            <a class="button" href="{% url 'resources_home' %}">
+                Explore Resources
+            </a>
+
+            <a class="button secondary-button"
+               href="{% url 'learning_home' %}">
+                View Learning Paths
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="home-section">
+
+    <div class="section-heading">
+
+        <span class="badge">Your Learning Workspace</span>
+
+        <h2>Everything in one place</h2>
+
+        <p>
+            Organize your development journey with the tools
+            you need to keep learning structured and accessible.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+
+            <span class="feature-icon">◆</span>
+
+            <h3>Technologies</h3>
+
+            <p>
+                Organize your resources around the technologies
+                you're learning.
+            </p>
+
+            <a href="{% url 'catalog_home' %}">
+                Browse Catalog →
+            </a>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon">◆</span>
+
+            <h3>Resources</h3>
+
+            <p>
+                Keep articles, videos, courses, books, and
+                documentation organized in one library.
+            </p>
+
+            <a href="{% url 'resources_home' %}">
+                Explore Resources →
+            </a>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon">◆</span>
+
+            <h3>Learning Paths</h3>
+
+            <p>
+                Combine resources into structured learning
+                journeys and progress step by step.
+            </p>
+
+            <a href="{% url 'learning_home' %}">
+                View Learning Paths →
+            </a>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon">◆</span>
+
+            <h3>Notes</h3>
+
+            <p>
+                Capture useful ideas and keep your learning notes
+                connected to the resources you study.
+            </p>
+
+            <a href="{% url 'note_home' %}">
+                View Notes →
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{ learn.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-header">
+        <span class="badge">Learning Library</span>
+
+        <h1>Edit Learning Path</h1>
+
+        <p>
+            Update the details for
+            <strong>{{ learn.title }}</strong>
+            in your DevShelf learning library.
+        </p>
+    </div>
+
+    <form method="post" class="resource-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <a class="button secondary-button"
+               href="{% url 'learning_detail' learn.pk %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

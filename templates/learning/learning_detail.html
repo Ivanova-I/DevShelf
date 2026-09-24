@@ -1,0 +1,92 @@
+<{% extends 'base.html' %}
+
+{% block title %}{{ learn.title }} | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="detail-page">
+
+    <div class="detail-header">
+
+        <div>
+            <span class="badge">Learning Path</span>
+
+            <h1>{{ learn.title }}</h1>
+
+            <p>{{ learn.description }}</p>
+        </div>
+
+    </div>
+
+    <div class="detail-grid">
+
+        <article class="card">
+
+            <h2>Learning Path Details</h2>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Difficulty</span>
+                    <strong>{{ learn.difficulty }}</strong>
+                </div>
+
+                <div>
+                    <span>Estimated Time</span>
+                    <strong>{{ learn.estimated_hours }} hours</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+        <article class="card">
+
+            <h2>Resources</h2>
+
+            <div class="tag-list">
+
+                {% for resource in learn.resources.all %}
+
+                    <a class="badge"
+                       href="{% url 'resources_detail' resource.pk %}">
+                        {{ resource.title }}
+                    </a>
+
+                {% empty %}
+
+                    <p>No resources assigned.</p>
+
+                {% endfor %}
+
+            </div>
+
+        </article>
+
+    </div>
+
+    <div class="detail-footer">
+
+        <a href="{% url 'learning_home' %}">
+            ← Back to Learning Paths
+        </a>
+
+        <div>
+
+            <a class="button secondary-button"
+               href="{% url 'learning_edit' learn.pk %}">
+                Edit
+            </a>
+
+            <a class="button danger-button"
+               href="{% url 'learning_delete' learn.pk %}">
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
