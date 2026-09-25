@@ -1376,3 +1376,61 @@ footer p {
         width: 100%;
     }
 }
+/* =========================================
+   Navigation
+   ========================================= */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.site-logo {
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* =========================================
+   Logged-in user
+   ========================================= */
+
+.user-greeting {
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   Logout
+   ========================================= */
+
+.logout-form {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.logout-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+
+    font: inherit;
+    color: inherit;
+
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}

@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -16,20 +15,74 @@
 
 <header>
     <nav>
-        <a href="{% url 'home' %}">DevShelf</a>
-        <div>
-            <a href="{% url 'catalog_home' %}">Catalog</a>
-            <a href="{% url 'resources_home' %}">Resources</a>
-            <a href="{% url 'learning_home' %}">Learning Paths</a>
-            <a href="{% url 'note_home' %}">Notes</a>
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="site-logo">
+            DevShelf
+        </a>
+
+        <!-- Navigation -->
+        <div class="nav-links">
+
+            <a href="{% url 'catalog_home' %}">
+                Catalog
+            </a>
+
+            <a href="{% url 'resources_home' %}">
+                Resources
+            </a>
+
+            <a href="{% url 'learning_home' %}">
+                Learning Paths
+            </a>
+
+            <a href="{% url 'note_home' %}">
+                Notes
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <span class="user-greeting">
+                    Hi, {{ user.username }}
+                </span>
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      class="logout-form">
+
+                    {% csrf_token %}
+
+                    <button type="submit" class="logout-button">
+                        Logout
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}">
+                    Register
+                </a>
+
+            {% endif %}
+
         </div>
+
     </nav>
 </header>
 
+
 <main>
+
     {% block content %}
     {% endblock %}
+
 </main>
+
 
 <footer class="site-footer">
 
@@ -41,7 +94,10 @@
         </div>
 
         <div class="site-footer-right">
-            <span>Created by Iva Ivanova</span>
+
+            <span>
+                Created by Iva Ivanova
+            </span>
 
             <a href="https://github.com/Ivanova-I"
                target="_blank"
@@ -49,7 +105,10 @@
                 GitHub ↗
             </a>
 
-            <span>© 2026</span>
+            <span>
+                © 2026
+            </span>
+
         </div>
 
     </div>
@@ -58,4 +117,3 @@
 
 </body>
 </html>
-
