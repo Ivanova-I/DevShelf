@@ -1,5 +1,45 @@
-
 :root {
+    --background: #181b19;
+    --bg: #181b19;
+    --surface: #20241f;
+    --surface-soft: #262b23;
+
+    --text: #e9e6dc;
+    --text-muted: #93998d;
+
+    --primary: #c9a24b;
+    --primary-dark: #a3792f;
+    --primary-soft: #2f2a1c;
+
+    --border: #2c3129;
+    --border-hover: #4a5240;
+
+    --neutral-strong: #33362f;
+    --neutral-strong-hover: #40443b;
+    --surface-alt: #262b23;
+    --surface-alt-hover: #2f342a;
+
+    --success: #7ea787;
+    --success-soft: #202a22;
+    --warning: #d9a441;
+    --warning-soft: #2b2418;
+    --danger: #c1604a;
+    --danger-dark: #a34e3c;
+    --danger-soft: #2c211c;
+    --danger-border: #4a3128;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+
+    --max-width: 1180px;
+}
+
+:root[data-theme="light"] {
+    --background: #f7f8fa;
     --bg: #f5f7fb;
     --surface: #ffffff;
     --surface-soft: #eef2ff;
@@ -7,15 +47,26 @@
     --text: #172033;
     --text-muted: #667085;
 
-    --primary: #635bff;
-    --primary-dark: #5147e8;
-    --primary-soft: #e9e7ff;
+    --primary: #a3792f;
+    --primary-dark: #855f22;
+    --primary-soft: #f3ecd9;
 
     --border: #e4e7ec;
+    --border-hover: #d7d9ff;
 
-    --success: #12b76a;
-    --warning: #f79009;
-    --danger: #f04438;
+    --neutral-strong: #172033;
+    --neutral-strong-hover: #273148;
+    --surface-alt: #eef0f4;
+    --surface-alt-hover: #e1e5eb;
+
+    --success: #3d7a5c;
+    --success-soft: #ecfdf3;
+    --warning: #b3790f;
+    --warning-soft: #fffaeb;
+    --danger: #b0603f;
+    --danger-dark: #d92d20;
+    --danger-soft: #fef3f2;
+    --danger-border: #fecdca;
 
     --shadow-sm: 0 2px 8px rgba(23, 32, 51, 0.06);
     --shadow-md: 0 10px 30px rgba(23, 32, 51, 0.10);
@@ -104,7 +155,7 @@ nav > a:first-child {
     font-weight: 800;
     letter-spacing: -0.03em;
 
-    color: var(--text);
+    color: var(--background);
 }
 
 nav > a:first-child::before {
@@ -252,7 +303,7 @@ button:hover,
 .card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
 }
 
 
@@ -449,7 +500,7 @@ footer p {
 .resource-card:hover {
     transform: translateY(-5px);
 
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
 
     box-shadow: var(--shadow-md);
 }
@@ -491,19 +542,19 @@ footer p {
 
 
 .difficulty.easy {
-    background: #ecfdf3;
+    background: var(--success-soft);
     color: var(--success);
 }
 
 
 .difficulty.medium {
-    background: #fffaeb;
+    background: var(--warning-soft);
     color: var(--warning);
 }
 
 
 .difficulty.hard {
-    background: #fef3f2;
+    background: var(--danger-soft);
     color: var(--danger);
 }
 
@@ -698,12 +749,12 @@ footer p {
 
 
 .secondary-button {
-    background: var(--text);
+    background: var(--neutral-strong);
 }
 
 
 .secondary-button:hover {
-    background: #273148;
+    background: var(--neutral-strong-hover);
 }
 
 
@@ -713,7 +764,7 @@ footer p {
 
 
 .danger-button:hover {
-    background: #d92d20;
+    background: var(--danger-dark);
 }
 
 
@@ -825,13 +876,13 @@ footer p {
 
 
 .form-actions .secondary-button {
-    background: #eef0f4;
+    background: var(--surface-alt);
     color: var(--text);
 }
 
 
 .form-actions .secondary-button:hover {
-    background: #e1e5eb;
+    background: var(--surface-alt-hover);
 }
 
 
@@ -858,9 +909,9 @@ footer p {
 
 .error-message {
     padding: 18px;
-    border: 1px solid #fecdca;
+    border: 1px solid var(--danger-border);
     border-radius: var(--radius-sm);
-    background: #fef3f2;
+    background: var(--danger-soft);
     color: var(--danger);
 }
 
@@ -898,7 +949,7 @@ footer p {
 
 .technology-card:hover {
     transform: translateY(-5px);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
     box-shadow: var(--shadow-md);
 }
 
@@ -966,7 +1017,7 @@ footer p {
 
 .learning-card:hover {
     transform: translateY(-5px);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
     box-shadow: var(--shadow-md);
 }
 
@@ -1030,7 +1081,7 @@ footer p {
 
 .note-card:hover {
     transform: translateY(-5px);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
     box-shadow: var(--shadow-md);
 }
 
@@ -1139,7 +1190,7 @@ footer p {
 
 .feature-card:hover {
     transform: translateY(-5px);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
     box-shadow: var(--shadow-md);
 }
 
@@ -1281,7 +1332,7 @@ footer p {
 
 .tag-card:hover {
     transform: translateY(-3px);
-    border-color: #d7d9ff;
+    border-color: var(--border-hover);
     box-shadow: var(--shadow-md);
 }
 
@@ -1433,4 +1484,107 @@ nav {
 
 .logout-button:hover {
     text-decoration: underline;
+}
+
+/* =========================================
+   Logout form override
+   (reset the global `form` card styling
+   for this one small inline form)
+   ========================================= */
+
+.logout-form {
+    max-width: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.logout-button {
+    display: inline;
+    min-height: auto;
+    padding: 0;
+    border-radius: 0;
+    font-weight: 600;
+}
+
+/* =========================================
+   Card differentiation
+   (each content type should read as a
+   different kind of thing, not the same
+   card shape repeated three times)
+   ========================================= */
+
+/* Resource cards: a colored left "spine" for
+   difficulty, instead of a floating badge only */
+
+.resource-card:has(.difficulty.easy) {
+    border-left: 4px solid var(--success);
+}
+
+.resource-card:has(.difficulty.medium) {
+    border-left: 4px solid var(--warning);
+}
+
+.resource-card:has(.difficulty.hard) {
+    border-left: 4px solid var(--danger);
+}
+
+/* Learning paths: a solid accent top edge,
+   since a path is one continuous thing,
+   not a difficulty-sorted item */
+
+.learning-card {
+    border-top: 3px solid var(--primary);
+}
+
+/* Notes: a thin rule line under the header,
+   like a real index card */
+
+.note-card-top {
+    position: relative;
+    padding-bottom: 14px;
+}
+
+.note-card-top::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--border);
+}
+
+/* =========================================
+   Homepage shelf motif
+   (one bold visual element tied to the
+   project's own name, kept quiet elsewhere)
+   ========================================= */
+
+.shelf {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 90px;
+    margin-bottom: 28px;
+}
+
+.shelf i {
+    display: block;
+    width: 14px;
+    border-radius: 2px 2px 0 0;
+}
+
+.shelf-base {
+    height: 3px;
+    background: var(--border);
+    margin-top: -3px;
+    max-width: 420px;
+}
+
+@media (max-width: 700px) {
+    .shelf {
+        height: 60px;
+    }
 }

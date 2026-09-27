@@ -1,5 +1,5 @@
 from urllib import error
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import ProtectedError
 from .models import Technology, Tag
@@ -14,6 +14,8 @@ def technology_detail(request,pk):
     technology = get_object_or_404(Technology, pk=pk)
     return render(request,'catalog/technology_detail.html',{'technology':technology})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def technology_create(request):
     if request.method == 'POST':
         form = TechnologyForm(request.POST)
@@ -24,6 +26,8 @@ def technology_create(request):
         form = TechnologyForm()
     return render(request,'catalog/technology_create.html',{'form':form})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def technology_edit(request,pk):
     technology = get_object_or_404(Technology, pk=pk)
     if request.method == 'POST':
@@ -35,6 +39,8 @@ def technology_edit(request,pk):
         form = TechnologyForm(instance=technology)
     return render(request,'catalog/technology_edit.html',{'form':form, 'technology':technology})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def technology_delete(request,pk):
     technology = get_object_or_404(Technology, pk=pk)
     if request.method == 'POST':
@@ -51,6 +57,8 @@ def tag_home(request):
     tag = Tag.objects.all()
     return render(request,'catalog/tag_home.html',{'tag':tag})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tag_create(request):
     if request.method == 'POST':
         form = TagForm(request.POST)
@@ -61,7 +69,8 @@ def tag_create(request):
         form = TagForm()
     return render(request, 'catalog/tag_create.html',{'form':form})
 
-
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tag_edit(request,pk):
     tag = get_object_or_404(Tag, pk=pk)
     if request.method == 'POST':
@@ -73,6 +82,8 @@ def tag_edit(request,pk):
         form = TagForm(instance=tag)
     return render(request, 'catalog/tag_edit.html',{'form':form})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tag_delete(request,pk):
     tag = get_object_or_404(Tag, pk=pk)
     if request.method == 'POST':

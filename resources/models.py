@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 from catalog.models import Technology, Tag
@@ -33,6 +34,8 @@ class Resource(models.Model):
         return self.title
 
 class Note(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -40,3 +43,20 @@ class Note(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.PROTECT)
     def __str__(self):
         return self.title
+
+class Progress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    status = models.CharField(choices=[('not started', 'Not Started'),('in progress', 'In Progress'),('completed', 'Completed')], default='not started', max_length=100)
+    last_position_sec = models.IntegerField(default=0)
+    started_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'resource'], name='unique_user_resource_progress')
+        ]
+
+    def __str__(self):
+        return f'{self.user.username}- {self.resource.title} -({self.status})'

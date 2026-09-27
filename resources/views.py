@@ -1,4 +1,6 @@
+from django.core.exceptions import PermissionDenied
 from django.db.models import ProtectedError
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Resource, Note
 from .forms import ResourceForm, NoteForm
@@ -25,6 +27,8 @@ def resources_detail(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
     return render(request,'resources/resources_detail.html',{'resource':resource})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def resources_create(request):
     if request.method == 'POST':
         form = ResourceForm(request.POST)
@@ -36,6 +40,9 @@ def resources_create(request):
 
     return render(request,  'resources/resources_create.html',{'form':form})
 
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def resources_edit(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
     if request.method == 'POST':
@@ -47,6 +54,9 @@ def resources_edit(request,pk):
         form = ResourceForm(instance=resource)
     return render(request, 'resources/resources_edit.html',{'form':form})
 
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def resources_delete(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
     if request.method == 'POST':
@@ -66,18 +76,25 @@ def note_detail(request,pk):
     note = get_object_or_404(Note, pk=pk)
     return render(request,'resources/note_detail.html',{'note':note})
 
+@login_required
 def note_create(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
-            form.save()
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+
             return redirect('note_home')
     else:
         form = NoteForm()
     return render(request, 'resources/note_create.html',{'form':form})
 
+@login_required
 def note_edit(request,pk):
     note = get_object_or_404(Note, pk=pk)
+    if note.user != request.user:
+        raise PermissionDenied
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
@@ -87,8 +104,11 @@ def note_edit(request,pk):
         form = NoteForm(instance=note)
     return render(request, 'resources/note_edit.html',{'form':form})
 
+@login_required
 def note_delete(request,pk):
     note = get_object_or_404(Note, pk=pk)
+    if note.user != request.user:
+        raise PermissionDenied
     if request.method == 'POST':
         try:
             note.delete()
