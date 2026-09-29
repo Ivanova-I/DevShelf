@@ -4,6 +4,9 @@
     --surface: #20241f;
     --surface-soft: #262b23;
 
+    --header-bg: rgba(24, 27, 25, 0.92);
+
+
     --text: #e9e6dc;
     --text-muted: #93998d;
 
@@ -43,6 +46,8 @@
     --bg: #f5f7fb;
     --surface: #ffffff;
     --surface-soft: #eef2ff;
+
+    --header-bg: rgba(255, 255, 255, 0.92);
 
     --text: #172033;
     --text-muted: #667085;
@@ -120,7 +125,7 @@ a:hover {
    ============================== */
 
 header {
-    background: rgba(255, 255, 255, 0.92);
+    background: var(--header-bg);
     border-bottom: 1px solid var(--border);
 
     position: sticky;
@@ -155,7 +160,7 @@ nav > a:first-child {
     font-weight: 800;
     letter-spacing: -0.03em;
 
-    color: var(--background);
+    color: var(--text);
 }
 
 nav > a:first-child::before {
@@ -1587,4 +1592,24 @@ nav {
     .shelf {
         height: 60px;
     }
+}
+
+.theme-toggle {
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: none;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-height: auto;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--border-hover);
+    transform: none;
+    box-shadow: none;
 }

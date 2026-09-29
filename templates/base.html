@@ -69,6 +69,7 @@
                 </a>
 
             {% endif %}
+            <button type="button" id="theme-toggle" class="theme-toggle">Theme</button>
 
         </div>
 
@@ -114,6 +115,30 @@
     </div>
 
 </footer>
+<script> function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+}
+(function (){
+    let saved = null
+    try {
+         saved = localStorage.getItem('devshelf-theme');
+    } catch (e) {}
+    if (saved) {
+        applyTheme(saved)
+    }
+}) ();
 
+const toggleButton = document.getElementById('theme-toggle')
+toggleButton.addEventListener('click', function() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark': 'light';
+
+    applyTheme(next);
+    try {
+        localStorage.setItem('devshelf-theme', next);
+    } catch (e) {}
+
+});
+</script>
 </body>
 </html>
