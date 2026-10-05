@@ -67,10 +67,11 @@
 
     <div class="detail-footer">
 
-        <a href="{% url 'learning_home' %}">
-            ← Back to Learning Paths
-        </a>
+    <a href="{% url 'learning_home' %}">
+        ← Back to Learning Paths
+    </a>
 
+    {% if user.is_staff %}
         <div>
 
             <a class="button secondary-button"
@@ -84,8 +85,11 @@
             </a>
 
         </div>
+    {% endif %}
 
-    </div>
+</div>
+
+
 
 </section>
 
