@@ -1,6 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import ProtectedError
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Resource, Note
 from .forms import ResourceForm, NoteForm, NoteEditForm
@@ -28,7 +28,7 @@ def resources_detail(request,pk):
     return render(request,'resources/resources_detail.html',{'resource':resource})
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+
 def resources_create(request):
     if request.method == 'POST':
         form = ResourceForm(request.POST)
@@ -42,7 +42,7 @@ def resources_create(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+
 def resources_edit(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
     if request.method == 'POST':
@@ -56,7 +56,7 @@ def resources_edit(request,pk):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+
 def resources_delete(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
     if request.method == 'POST':
