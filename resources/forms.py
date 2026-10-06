@@ -9,3 +9,9 @@ class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
         fields =['title', 'content', 'resource']
+
+
+class NoteEditForm(NoteForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['resource'].disabled = True

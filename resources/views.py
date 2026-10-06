@@ -3,7 +3,7 @@ from django.db.models import ProtectedError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Resource, Note
-from .forms import ResourceForm, NoteForm
+from .forms import ResourceForm, NoteForm, NoteEditForm
 from catalog.models import Technology
 
 
@@ -96,12 +96,12 @@ def note_edit(request,pk):
     if note.user != request.user:
         raise PermissionDenied
     if request.method == 'POST':
-        form = NoteForm(request.POST, instance=note)
+        form = NoteEditForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
             return redirect('note_home')
     else:
-        form = NoteForm(instance=note)
+        form = NoteEditForm(instance=note)
     return render(request, 'resources/note_edit.html',{'form':form})
 
 @login_required
