@@ -153,3 +153,8 @@ def progress_update(request,pk):
         progress.completed_at = None
     progress.save()
     return redirect('resources_detail',pk=resource.pk)
+
+@login_required
+def my_learning(request):
+    progress_list = (Progress.objects.filter(user=request.user).select_related('resource').order_by('-updated_at'))
+    return render(request,'resources/my_learning.html',{'progress_list':progress_list})

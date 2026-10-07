@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}My Learning | DevShelf{% endblock %}
+
+{% block content %}
+
+<section class="detail-page">
+
+    <div class="detail-header">
+        <div>
+            <span class="badge">My Learning</span>
+            <h1>Your progress</h1>
+            <p>Everything you've started or finished, with the latest activity first.</p>
+        </div>
+    </div>
+
+    <div class="resource-grid">
+
+        {% for progress in progress_list %}
+            <article class="card resource-card">
+
+                <span class="badge">{{ progress.get_status_display }}</span>
+
+                <h2>{{ progress.resource.title }}</h2>
+
+                <p>{{ progress.resource.description|truncatewords:18 }}</p>
+
+                <div class="detail-info">
+                    <div>
+                        <span>Type</span>
+                        <strong>{{ progress.resource.resource_type|title }}</strong>
+                    </div>
+
+                    {% if progress.started_at %}
+                        <div>
+                            <span>Started</span>
+                            <strong>{{ progress.started_at|date:"j M Y" }}</strong>
+                        </div>
+                    {% endif %}
+
+                    {% if progress.completed_at %}
+                        <div>
+                            <span>Completed</span>
+                            <strong>{{ progress.completed_at|date:"j M Y" }}</strong>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <a class="button secondary-button"
+                   href="{% url 'resources_detail' progress.resource.pk %}">
+                    Open
+                </a>
+
+            </article>
+        {% empty %}
+            <article class="card">
+                <h2>Nothing here yet</h2>
+                <p>Open a resource and mark it as started to see it listed here.</p>
+                <a class="button" href="{% url 'resources_home' %}">Browse resources</a>
+            </article>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

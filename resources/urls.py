@@ -10,5 +10,5 @@ urlpatterns = [path('', views.resources_home, name='resources_home'),
                path('notes/create/', views.note_create, name='note_create'),
                path('notes/<int:pk>/edit/', views.note_edit, name='note_edit'),
                path('notes/<int:pk>/delete/', views.note_delete, name='note_delete'),
-               path('<int:pk>/progress/', views.progress_update, name='progress_update')
-               ]
+               path('<int:pk>/progress/', views.progress_update, name='progress_update'),
+               path('my_learning/', views.my_learning, name='my_learning'),]
