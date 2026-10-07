@@ -1,8 +1,11 @@
+
 from django.core.exceptions import PermissionDenied
+from django.views.decorators.http import require_POST
+from django.utils import timezone
 from django.db.models import ProtectedError
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Resource, Note
+from .models import Resource, Note, Progress
 from .forms import ResourceForm, NoteForm, NoteEditForm
 from catalog.models import Technology
 
@@ -25,7 +28,12 @@ def resources_home(request):
 
 def resources_detail(request,pk):
     resource = get_object_or_404(Resource, pk=pk)
-    return render(request,'resources/resources_detail.html',{'resource':resource})
+
+    progress = None
+    if request.user.is_authenticated:
+        progress = Progress.objects.filter(user=request.user, resource=resource).first()
+    return render(request, 'resources/resources_detail.html', {'resource': resource, 'progress': progress})
+
 
 @login_required
 
@@ -117,3 +125,31 @@ def note_delete(request,pk):
             return render(request, 'resources/note_delete.html', {'note': note,
                                                                   'error':'This note cannot be deleted because it is used by one or more objects.'})
     return render(request, 'resources/note_delete.html',{'note':note})
+
+@login_required
+@require_POST
+def progress_update(request,pk):
+    resource = get_object_or_404(Resource, pk=pk)
+    new_status = request.POST.get('status')
+    valid_status = ['in progress', 'completed', 'not started']
+    if new_status not in valid_status:
+        return redirect('resources_detail',pk=resource.pk)
+    progress, created = Progress.objects.get_or_create(user= request.user, resource=resource,)
+    progress.status = new_status
+
+
+
+    if new_status == 'in progress':
+        if not  progress.started_at:
+            progress.started_at = timezone.now()
+        progress.completed_at = None
+
+
+    if new_status == 'completed':
+        progress.completed_at = timezone.now()
+
+    if new_status == 'not started':
+        progress.started_at = None
+        progress.completed_at = None
+    progress.save()
+    return redirect('resources_detail',pk=resource.pk)

@@ -33,12 +33,37 @@
     {% if resource.resource_type == 'video' and 'youtu' in resource.url %}
         <div class="video-embed">
             <iframe src="{{ resource.url|youtube_video }}"
-        title="{{ resource.title }}"
-        width="100%" height="420"
-        style="border: 0; border-radius: 12px;"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+                    title="{{ resource.title }}"
+                    width="100%" height="420"
+                    style="border: 0; border-radius: 12px;"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
+    {% endif %}
+
+
+    {% if user.is_authenticated %}
+        <div class="card progress-card">
+            <h2>Your progress</h2>
+
+            <p>
+                Status:
+                <strong>
+                    {% if progress %}{{ progress.get_status_display }}{% else %}Not Started{% endif %}
+                </strong>
+            </p>
+
+            <form method="post" action="{% url 'progress_update' resource.pk %}" class="form-actions">
+                {% csrf_token %}
+                <button class="button secondary-button" type="submit" name="status" value="not started">Not started</button>
+                <button class="button secondary-button" type="submit" name="status" value="in progress">In progress</button>
+                <button class="button" type="submit" name="status" value="completed">Mark as completed</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="card progress-card">
+            <p>Log in to track your progress on this resource.</p>
         </div>
     {% endif %}
 
@@ -103,7 +128,7 @@
             ← Back to Resources
         </a>
 
-
+        {% if user.is_authenticated %}
             <div>
                 <a class="button secondary-button"
                    href="{% url 'resources_edit' resource.pk %}">
@@ -115,7 +140,7 @@
                     Delete
                 </a>
             </div>
-
+        {% endif %}
 
     </div>
 
