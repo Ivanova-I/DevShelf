@@ -372,10 +372,11 @@ select {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
 
-    background: white;
+    background: var(--surface);
     color: var(--text);
-
     font: inherit;
+
+
 
     outline: none;
 
@@ -1612,4 +1613,56 @@ nav {
     border-color: var(--border-hover);
     transform: none;
     box-shadow: none;
+}
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+:root {
+    color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+}
+
+.progress-card {
+    margin: 24px 0;
+}
+
+.progress-card form {
+    max-width: none;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin-top: 16px;
+}
+
+.progress-card .form-actions {
+    justify-content: flex-start;
+    border-top: none;
+    margin-top: 16px;
+    padding-top: 0;
+}
+
+:root:not([data-theme="light"]) button,
+:root:not([data-theme="light"]) .button {
+    color: #181b19;
+}
+
+:root:not([data-theme="light"]) .secondary-button,
+:root:not([data-theme="light"]) .danger-button {
+    color: var(--text);
+}
+
+:root:not([data-theme="light"]) .logout-button,
+:root:not([data-theme="light"]) .theme-toggle {
+    color: var(--text-muted);
+}
+
+:root:not([data-theme="light"]) .logout-button:hover,
+:root:not([data-theme="light"]) .theme-toggle:hover {
+    color: var(--text);
 }
