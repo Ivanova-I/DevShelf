@@ -40,7 +40,7 @@ class Note(models.Model):
     content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    resource = models.ForeignKey(Resource, on_delete=models.PROTECT)
+
     def __str__(self):
         return self.title
 
