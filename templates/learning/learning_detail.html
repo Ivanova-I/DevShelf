@@ -1,4 +1,4 @@
-<{% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}{{ learn.title }} | DevShelf{% endblock %}
 
@@ -40,56 +40,54 @@
 
         </article>
 
-        <article class="card">
+    </div>
 
-            <h2>Resources</h2>
 
-            <div class="tag-list">
+    <h2>Resources in this path</h2>
 
-                {% for resource in learn.resources.all %}
+    <section class="resource-grid">
 
-                    <a class="badge"
-                       href="{% url 'resources_detail' resource.pk %}">
-                        {{ resource.title }}
-                    </a>
+        {% for resource in learn.resources.all %}
 
-                {% empty %}
+            {% include 'partials/resource_card.html' %}
 
-                    <p>No resources assigned.</p>
+        {% empty %}
 
-                {% endfor %}
-
+            <div class="card">
+                <h2>No resources assigned</h2>
+                <p>Edit this learning path to add resources.</p>
             </div>
 
-        </article>
+        {% endfor %}
 
-    </div>
+    </section>
+
 
     <div class="detail-footer">
 
-    <a href="{% url 'learning_home' %}">
-        ← Back to Learning Paths
-    </a>
+        <a href="{% url 'learning_home' %}">
+            ← Back to Learning Paths
+        </a>
 
+        {% if user.is_authenticated %}
 
-        <div>
+            <div>
 
-            <a class="button secondary-button"
-               href="{% url 'learning_edit' learn.pk %}">
-                Edit
-            </a>
+                <a class="button secondary-button"
+                   href="{% url 'learning_edit' learn.pk %}">
+                    Edit
+                </a>
 
-            <a class="button danger-button"
-               href="{% url 'learning_delete' learn.pk %}">
-                Delete
-            </a>
+                <a class="button danger-button"
+                   href="{% url 'learning_delete' learn.pk %}">
+                    Delete
+                </a>
 
-        </div>
+            </div>
 
+        {% endif %}
 
-</div>
-
-
+    </div>
 
 </section>
 

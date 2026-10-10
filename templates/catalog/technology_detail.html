@@ -42,33 +42,55 @@
         </article>
 
 
-       <article class="card">
+        <article class="card">
 
-    <h2>Actions</h2>
+            <h2>Actions</h2>
 
-    <p>
-        Manage this technology or return to your catalog.
-    </p>
+            <p>
+                Manage this technology or return to your catalog.
+            </p>
 
+            {% if user.is_authenticated %}
 
-        <div class="form-actions">
+                <div class="form-actions">
 
-            <a class="button secondary-button"
-               href="{% url 'technology_edit' technology.pk %}">
-                Edit
-            </a>
+                    <a class="button secondary-button"
+                       href="{% url 'technology_edit' technology.pk %}">
+                        Edit
+                    </a>
 
-            <a class="button danger-button"
-               href="{% url 'technology_delete' technology.pk %}">
-                Delete
-            </a>
+                    <a class="button danger-button"
+                       href="{% url 'technology_delete' technology.pk %}">
+                        Delete
+                    </a>
 
-        </div>
+                </div>
 
+            {% endif %}
 
-</article>
+        </article>
 
     </div>
+
+
+    <h2>Resources for {{ technology.name }}</h2>
+
+    <section class="resource-grid">
+
+        {% for resource in technology.resource_set.all %}
+
+            {% include 'partials/resource_card.html' %}
+
+        {% empty %}
+
+            <div class="card">
+                <h2>No resources yet</h2>
+                <p>Nothing has been added for this technology.</p>
+            </div>
+
+        {% endfor %}
+
+    </section>
 
 
     <div class="detail-footer">
@@ -82,3 +104,6 @@
 </section>
 
 {% endblock %}
+
+
+
