@@ -23,19 +23,8 @@
 
         {{ form.as_p }}
 
-        <div class="form-actions">
-
-            <a class="button secondary-button"
-               href="{% url 'note_detail' note.pk %}">
-                Cancel
-            </a>
-
-            <button type="submit">
-                Save Changes
-            </button>
-
-        </div>
-
+       {% url 'note_home' as cancel_url %}
+       {% include 'partials/form_actions.html' with submit_label='Save Changes' %}
     </form>
 
 </section>

@@ -25,18 +25,8 @@
 
         {{ form.as_p }}
 
-        <div class="form-actions">
-
-            <a class="button secondary-button"
-               href="{% url 'resources_home' %}">
-                Cancel
-            </a>
-
-            <button type="submit">
-                Add Resource
-            </button>
-
-        </div>
+       {% url 'resources_home' as cancel_url %}
+{% include 'partials/form_actions.html' with submit_label='Add Resource' %}
 
     </form>
 
