@@ -30,6 +30,16 @@ class Resource(models.Model):
     technology = models.ForeignKey(Technology, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, related_name='resources')
 
+    class Meta:
+        ordering = ['-created_at']
+
+    @property
+    def is_short(self):
+        if self.estimated_minutes <= 15:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return self.title
 
@@ -41,8 +51,12 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return self.title
+
 
 class Progress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
