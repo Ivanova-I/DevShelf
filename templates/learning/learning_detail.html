@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load resource_extras %}
 {% block title %}{{ learn.title }} | DevShelf{% endblock %}
 
 {% block content %}
@@ -36,6 +36,10 @@
                     <strong>{{ learn.estimated_hours }} hours</strong>
                 </div>
 
+                <div>
+                    <span>Total Resource Time</span>
+                    <strong>{% path_total_time learn %}</strong>
+                </div>
             </div>
 
         </article>

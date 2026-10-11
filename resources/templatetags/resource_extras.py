@@ -16,3 +16,13 @@ def youtube_video(url):
 
     return url
 
+@register.simple_tag
+def path_total_time(learning_path):
+    total_time = sum(r.estimated_minutes for r in learning_path.resources.all())
+    hours, minutes = divmod(total_time, 60)
+    if hours and minutes:
+        return f'Total {hours} hours and  {minutes} mins'
+    elif hours:
+        return f'Total {hours} hours'
+    else:
+        return f'Total {minutes} mins'
